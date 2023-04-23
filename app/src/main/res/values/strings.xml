@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">counter</string>
+
+    <string name="msg_confirm">Confirm</string>
+    <string name="msg_done">Done</string>
+    <string name="msg_save">Save</string>
+    <string name="msg_yes">Yes</string>
+    <string name="msg_no">No</string>
+    <string name="msg_reset">Do you want to reset all records?</string>
+    <string name="msg_decrease">Decrease(-)</string>
+    <string name="msg_increase">Increase(+)</string>
+
+    <string name="title_history">History:</string>
+</resources>

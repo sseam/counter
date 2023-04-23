@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">카운터</string>
+
+    <string name="msg_confirm">확인</string>
+    <string name="msg_done">완료</string>
+    <string name="msg_save">저장</string>
+    <string name="msg_yes">예</string>
+    <string name="msg_no">아니오</string>
+    <string name="msg_reset">기록을 모두 초기화하시겠습니까?</string>
+    <string name="msg_decrease">감소(-)</string>
+    <string name="msg_increase">증가(+)</string>
+
+    <string name="title_history">기록:</string>
+</resources>
