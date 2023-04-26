@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Ignore com.sseam.android.counter.config.Constants class
+com/sseam/android/counter/config/Constants.class

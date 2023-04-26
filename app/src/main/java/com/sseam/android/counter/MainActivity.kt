@@ -5,10 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,15 +16,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.outlined.AccountBox
-import androidx.compose.material.icons.outlined.AddCircle
 import androidx.compose.material.icons.outlined.CheckCircle
-import androidx.compose.material.icons.outlined.Clear
-import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -52,14 +42,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.DialogProperties
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
+import com.sseam.android.counter.config.Constants.Companion.BANNER_AD_UNIT_ID
+import com.sseam.android.counter.config.Constants.Companion.BANNER_AD_UNIT_ID_TEST
 import com.sseam.android.counter.ui.theme.CounterTheme
 import com.sseam.android.counter.ui.theme.RetroColor1
 import com.sseam.android.counter.ui.theme.RetroColor11
@@ -67,6 +61,9 @@ import com.sseam.android.counter.ui.theme.RetroColor11
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        MobileAds.initialize(this) { }
+
         setContent {
             CounterTheme {
                 // A surface container using the 'background' color from the theme
@@ -78,6 +75,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        MobileAds.initialize(this)
+
     }
 }
 
@@ -98,12 +97,28 @@ fun Counter() {
     ConstraintLayout(modifier = Modifier
         .fillMaxSize()
         .padding(bottom = 0.dp)) {
-        //val (saveButton, decreaseButton, increaseButton, countText, historyText) = createRefs()
-        // Save count to SharedPreferences
+        val (banner, row, column) = createRefs()
+
+        Row(
+            modifier = Modifier
+                .height(100.dp)
+                .constrainAs(banner) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+        ) {
+            BannerAdView()
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 8.dp, start = 8.dp, end = 8.dp),
+                .padding(top = 8.dp, start = 8.dp, end = 8.dp)
+                .constrainAs(row) {
+                    top.linkTo(banner.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                },
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -142,7 +157,13 @@ fun Counter() {
         }
         //저장 기록 표시
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .constrainAs(column) {
+                    top.linkTo(row.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val showDialog = remember { mutableStateOf(false) }
@@ -197,7 +218,8 @@ fun Counter() {
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
         ) {
             Text(
                 text = count.toString(),
@@ -248,7 +270,26 @@ fun Counter() {
 }
 const val MAX_HISTORY_COUNT = 5
 
-@Preview(showBackground = true)
+@Composable
+fun BannerAdView(
+    isTest: Boolean = false
+) {
+    val unitId = if (isTest) BANNER_AD_UNIT_ID_TEST else BANNER_AD_UNIT_ID
+
+    AndroidView(
+        modifier = Modifier.fillMaxSize(),
+        factory = { context ->
+            AdView(context).apply {
+                setAdSize(AdSize.LARGE_BANNER)
+                adUnitId = unitId
+                loadAd(AdRequest.Builder().build())
+            }
+        }
+    )
+}
+
+
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun CounterPreview() {
     CounterTheme {

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">카운터</string>
-
+    <string name="admob_app_id">${Constants.ADMOB_APP_ID}</string>
+    <string name="banner_ad_unit_id">${Constants.BANNER_AD_UNIT_ID}</string>
+    <string name="banner_ad_unit_id_test">${Constants.BANNER_AD_UNIT_ID_TEST}</string>
     <string name="msg_confirm">확인</string>
     <string name="msg_done">완료</string>
     <string name="msg_save">저장</string>

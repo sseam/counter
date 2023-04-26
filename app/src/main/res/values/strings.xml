@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">counter</string>
-
+    <string name="admob_app_id">${Constants.ADMOB_APP_ID}</string>
+    <string name="banner_ad_unit_id">${Constants.BANNER_AD_UNIT_ID}</string>
+    <string name="banner_ad_unit_id_test">${Constants.BANNER_AD_UNIT_ID_TEST}</string>
     <string name="msg_confirm">Confirm</string>
     <string name="msg_done">Done</string>
     <string name="msg_save">Save</string>
