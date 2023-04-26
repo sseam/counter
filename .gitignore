@@ -14,4 +14,4 @@
 .cxx
 local.properties
 
-Constants.java
+/app/src/main/java/com/sseam/android/counter/config
