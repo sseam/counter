@@ -5,18 +5,18 @@ plugins {
 
 android {
     namespace 'com.sseam.android.counter'
-    compileSdk 33
 
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
     def admob_app_id = properties.getProperty('admob.app.id')
 
+    compileSdk 34
     defaultConfig {
         applicationId "com.sseam.android.counter"
         minSdk 26
-        targetSdk 33
-        versionCode 2
-        versionName "1.1"
+        targetSdkVersion 34
+        versionCode 3
+        versionName "1.1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -33,7 +33,7 @@ android {
         }
 
         dependencies {
-            classpath 'com.google.gms:google-services:4.3.15'
+            classpath 'com.google.gms:google-services:4.4.2'
         }
     }
 
@@ -44,11 +44,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
     buildFeatures {
         compose true
@@ -65,24 +65,24 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.10.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
-    implementation 'androidx.activity:activity-compose:1.7.1'
-    implementation platform('androidx.compose:compose-bom:2022.10.00')
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.3'
+    implementation 'androidx.activity:activity-compose:1.9.0'
+    implementation platform('androidx.compose:compose-bom:2024.06.00')
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-graphics'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
-    implementation 'androidx.compose.foundation:foundation-layout:1.4.2'
-    implementation 'androidx.compose.ui:ui-tooling:1.5.0-alpha03'
+    implementation 'androidx.compose.foundation:foundation-layout:1.6.8'
+    implementation 'androidx.compose.ui:ui-tooling:1.6.8'
     implementation 'androidx.constraintlayout:constraintlayout-compose:1.0.1'
-    implementation 'androidx.preference:preference-ktx:1.2.0'
-    implementation 'com.google.android.gms:play-services-ads:22.0.0'
-    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
+    implementation 'com.google.android.gms:play-services-ads:23.2.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation platform('androidx.compose:compose-bom:2024.06.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
