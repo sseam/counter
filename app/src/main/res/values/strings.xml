@@ -11,5 +11,5 @@
     <string name="msg_decrease">Decrease(-)</string>
     <string name="msg_increase">Increase(+)</string>
 
-    <string name="title_history">History:</string>
+    <string name="title_history">History</string>
 </resources>
